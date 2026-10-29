@@ -235,7 +235,7 @@ Característica: Servicios
     Dado que llego a la sección Servicios
     Entonces veo exactamente estos 7 servicios:
       | Páginas web institucionales                      |
-      | Catálogos sin precios con cotización por WhatsApp |
+      | Catálogos con cotización por WhatsApp            |
       | Automatizaciones e inteligencia artificial       |
       | Revisión y pruebas de su página o aplicación     |
       | Presencia en Google y Google Maps                |
