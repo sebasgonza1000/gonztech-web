@@ -125,7 +125,7 @@ El detalle está en `defectos.md`.
 
 1. Envío real del formulario y llegada del correo (CA-12.1).
 2. Vista previa en WhatsApp con la dirección real; confirmar `gonztech.netlify.app` en `og:url` y `og:image` (CA-16.1, CC-16).
-3. Fecha de vigencia en el aviso y revisión de un abogado (CA-14.1, CC-08).
+3. ~~Fecha de vigencia en el aviso~~ (hecho: 29 oct 2026) y revisión de un abogado (CA-14.1, CC-08).
 4. Lighthouse sobre la dirección real: Rendimiento, Accesibilidad y SEO ≥ 90 (RNF-02, RNF-03, RNF-07) y https sin advertencias (RNF-04).
 5. Seguridad: que Netlify **no publique** `docs/`, `CLAUDE.md` ni `.claude/`, y agregar cabeceras básicas (`X-Content-Type-Options`, `Referrer-Policy`, `Content-Security-Policy`).
 
