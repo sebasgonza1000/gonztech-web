@@ -41,12 +41,12 @@
 | CP-00.2 | CA-00.2 Sin desplazamiento horizontal | Ancho de página = ancho de pantalla a 360 px en las 4 páginas. | ✅ 360 = 360 |
 | CP-00.3 | CA-00.3 Saltar al contenido | Tab → aparece el enlace; Enter → el foco pasa a `main#contenido`. | ✅ (ver DEF-04 para `gracias.html`) |
 | CP-00.4 | CA-00.4 Identidad visual | Variables de color Bosque, logo en el encabezado, icono de pestaña. | ⚠️ Pasa con el tigre; el texto del criterio todavía dice "sello" (OBS-01) |
-| CP-00.5 | CA-00.5 Logo en vector | Tigre, nombre y eslogan son SVG; nítidos en 360, 768 y 1280 px. | ✅ en Chromium · ⏳ iPhone y Android: Sebastián |
+| CP-00.5 | CA-00.5 Logo en vector | Tigre, nombre y eslogan son SVG; nítidos en 360, 768 y 1280 px. | ✅ en Chromium · ✅ celular real: Sebastián, 29 oct 2026 |
 | CP-00.6 | CA-00.6 Dorado no se usa en textos | Búsqueda de `color: var(--color-acento)` en el CSS. | ✅ ninguna regla |
 | CP-01.1 | CA-01.1 Portada sin desplazarse | Captura a 360 × 640: marca, nombre, línea, frase y botón visibles. | ✅ |
 | CP-01.2 | CA-01.2 Prueba de los 10 segundos | Requiere 3 personas. | ⏳ Sebastián (§7) |
 | CP-01.3 | CA-01.3 Reglas de contenido | Búsqueda de "ingeniero", empleador, cifras y testimonios. | ✅ |
-| CP-02.1 | CA-02.1 WhatsApp desde el celular | Enlace `wa.me/573175680756` con mensaje inicial. | ✅ enlace correcto · ⏳ toque real en celular: Sebastián |
+| CP-02.1 | CA-02.1 WhatsApp desde el celular | Enlace `wa.me/573175680756` con mensaje inicial. | ✅ enlace correcto · ✅ toque real en celular: Sebastián, 29 oct 2026 |
 | CP-02.2 | CA-02.2 WhatsApp desde computador | `target="_blank"` y `rel="noopener"`; aviso "se abre en una pestaña nueva". | ✅ |
 | CP-02.3 | CA-02.3 Tildes y "ñ" | Decodificar el mensaje: "Hola Sebastián, vi su página y quiero hablar sobre mi negocio." | ✅ |
 | CP-02.4 | CA-02.4 Mismo número en todos | Comparar todos los enlaces `wa.me` de las 4 páginas con el oficial. | ✅ 1 enlace distinto en toda la página |
@@ -83,7 +83,7 @@
 | CP-11.1 | CA-11.1 Correo | `mailto:contacto.gonztech@gmail.com` con asunto. | ✅ |
 | CP-11.2 | CA-11.2 WhatsApp | Enlace oficial. | ✅ |
 | CP-11.3 | CA-11.3 Datos como texto | Correo y número visibles y seleccionables (`user-select: text`). | ✅ |
-| CP-12.1 | CA-12.1 Envío exitoso | Simulado: se envía `form-name=contacto&…` a `/` y aparece "Gracias, recibí su mensaje. Le respondo pronto."; el formulario se limpia. | ✅ simulado · ⏳ envío real: Fase 7 |
+| CP-12.1 | CA-12.1 Envío exitoso | Simulado: se envía `form-name=contacto&…` a `/` y aparece "Gracias, recibí su mensaje. Le respondo pronto."; el formulario se limpia. | ✅ simulado · ✅ **envío real** en https://gonztech.netlify.app (29 oct 2026): mensaje de gracias, correo recibido y registro en Netlify Forms |
 | CP-12.2 | CA-12.2 Campos vacíos | Nombre, medio de contacto y mensaje muestran su error; el foco va a Nombre. | ✅ |
 | CP-12.3 | CA-12.3 Contacto inválido | "abc", "12345" y "ana@correo" se rechazan; "300 123 4567", "+57 3001234567" y "ana@correo.com" se aceptan. | ✅ |
 | CP-12.4 | CA-12.4 Mensaje largo | Al pegar 1.050 caracteres quedan 1.000 y "Quedan 0 caracteres." | ✅ |
@@ -99,12 +99,12 @@
 | CP-14.3 | CA-14.3 Siempre accesible | Enlace en el pie de `index.html`. | ✅ |
 | CP-15.1 | CA-15.1 Pie | "Gonztech · Sebastián González – Desarrollo web y calidad de software © 2026 · Aviso de privacidad". | ✅ |
 | CP-15.2 | CA-15.2 Año automático | El año sale de JavaScript (`new Date().getFullYear()`). | ✅ |
-| CP-16.1 | CA-16.1 Vista previa en WhatsApp | Las 11 etiquetas `og:` y `twitter:` están. | ⏳ prueba real: Fase 7 |
+| CP-16.1 | CA-16.1 Vista previa en WhatsApp | Las 11 etiquetas `og:` y `twitter:` están. | ✅ etiquetas · ✅ **prueba real** en WhatsApp con https://gonztech.netlify.app: Sebastián, 29 oct 2026 |
 | CP-16.2 | CA-16.2 Imagen | 1200 × 630 px, 59 KB. | ✅ |
 | CP-16.3 | CA-16.3 Título | "Gonztech \| Desarrollo web y calidad de software". | ✅ |
 
-**Resumen:** 65 criterios · **63 pasan** en este ambiente · **2 pendientes**: CA-01.2 (Sebastián) y CA-16.1 (Fase 7). CA-05.4 pasó a ✅ con el CC-14.
-De los que pasan, 3 tienen una observación de documentación (CA-00.4, CA-05.1, CA-09.1) y 6 se confirman después: en celular real (CA-00.5, CA-02.1), con las personas de la §7 (CA-05.2, CA-14.2) o en la Fase 7 (CA-12.1 envío real, CA-14.1 fecha de vigencia).
+**Resumen:** 65 criterios · **64 pasan** · **1 pendiente**: CA-01.2 (Sebastián). CA-05.4 pasó a ✅ con el CC-14 y CA-16.1 con la prueba real en la Fase 7.
+De los que pasan, 3 tienen una observación de documentación (CA-00.4, CA-05.1, CA-09.1) y 6 se confirmaban después. Ya quedaron confirmados 4 en la Fase 7: en celular real (CA-00.5, CA-02.1), el envío real (CA-12.1) y la fecha de vigencia (CA-14.1). Faltan 2, con las personas de la §7 (CA-05.2, CA-14.2).
 
 ## 5. Defectos, observaciones y pendientes
 
@@ -123,11 +123,12 @@ El detalle está en `defectos.md`.
 
 ## 6. Para la Fase 7 (necesitan la página publicada)
 
-1. Envío real del formulario y llegada del correo (CA-12.1).
-2. Vista previa en WhatsApp con la dirección real; confirmar `gonztech.netlify.app` en `og:url` y `og:image` (CA-16.1, CC-16).
+1. ~~Envío real del formulario y llegada del correo~~ (CA-12.1): **pasa**, 29 oct 2026.
+2. ~~Vista previa en WhatsApp con la dirección real~~ (CA-16.1, CC-16): **pasa**, 29 oct 2026. `og:url` y `og:image` usan `gonztech.netlify.app`.
 3. ~~Fecha de vigencia en el aviso~~ (hecho: 29 oct 2026) y revisión de un abogado (CA-14.1, CC-08).
-4. Lighthouse sobre la dirección real: Rendimiento, Accesibilidad y SEO ≥ 90 (RNF-02, RNF-03, RNF-07) y https sin advertencias (RNF-04).
-5. Seguridad: que Netlify **no publique** `docs/`, `CLAUDE.md` ni `.claude/`, y agregar cabeceras básicas (`X-Content-Type-Options`, `Referrer-Policy`, `Content-Security-Policy`).
+4. ~~Lighthouse sobre la dirección real~~ (RNF-02, RNF-03, RNF-07, RNF-04): **pasa**, 29 oct 2026, PageSpeed Insights sobre https://gonztech.netlify.app. Celular y escritorio dan lo mismo: Rendimiento **100**, Accesibilidad **100**, Prácticas recomendadas **92**, SEO **100**; https sin advertencias.
+5. ~~Seguridad~~: **pasa**, 29 oct 2026. Netlify solo publica la carpeta `publicar/` (los archivos internos dan 404) y las cabeceras de `netlify.toml` llegan en vivo.
+6. ~~Prueba en celular real~~ (RNF-06, CA-00.5, CA-02.1, guía §7 B): **pasa**, 29 oct 2026. Sebastián revisó logo, WhatsApp, botón flotante y menú.
 
 ## 7. Guía corta para Sebastián
 
@@ -153,3 +154,5 @@ El detalle está en `defectos.md`.
 La página cumple los criterios que se pueden probar sin publicarla. No hay defectos críticos, altos ni medios: solo uno bajo (DEF-04) y cuatro detalles de documentación.
 
 **PEN-01 quedó resuelto en el CC-14:** ya no hay bloqueos para publicar. Lo demás (§6 y §7) se completa en la Fase 7 y con las pruebas de Sebastián.
+
+**Actualización de la Fase 7 (29 oct 2026):** con la página publicada pasan el envío real del formulario, la vista previa en WhatsApp, Lighthouse (100 · 100 · 92 · 100), la prueba en celular real y la seguridad en vivo. **64 de 65 criterios pasan.** Solo queda CA-01.2 (prueba de los 10 segundos con 3 personas), que no bloquea: la página queda **en producción**.

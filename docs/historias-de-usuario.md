@@ -636,10 +636,10 @@ Casos y resultados de la Fase 5 (29 oct 2026). Detalle en `plan-de-pruebas.md`.
 | RF-09 | HU-09 | CA-09.1 a CA-09.3 | CP-09.1 a CP-09.3 | ✅ 3/3 (OBS-03 corregida en CC-13) |
 | RF-10 | HU-10 | CA-10.1 a CA-10.3 | CP-10.1 a CP-10.3 | ✅ 3/3 |
 | RF-11 | HU-11 | CA-11.1 a CA-11.3 | CP-11.1 a CP-11.3 | ✅ 3/3 |
-| RF-12 | HU-12 | CA-12.1 a CA-12.8 | CP-12.1 a CP-12.8 | ✅ 8/8 · ⏳ envío real en Fase 7 |
+| RF-12 | HU-12 | CA-12.1 a CA-12.8 | CP-12.1 a CP-12.8 | ✅ 8/8 · envío real probado en vivo (29 oct 2026) |
 | RF-13, RNF-11 | HU-13 | CA-13.1 a CA-13.3 | CP-13.1 a CP-13.3 | ✅ 3/3 |
 | RF-14, RNF-11 | HU-14 | CA-14.1 a CA-14.3 | CP-14.1 a CP-14.3 | ✅ 3/3 · ⏳ fecha de vigencia y abogado (Fase 7) |
 | RF-15 | HU-15 | CA-15.1 a CA-15.2 | CP-15.1 a CP-15.2 | ✅ 2/2 |
-| RF-16, RNF-07 | HU-16 | CA-16.1 a CA-16.3 | CP-16.1 a CP-16.3 | ✅ 2/3 · ⏳ CA-16.1 (Fase 7) |
+| RF-16, RNF-07 | HU-16 | CA-16.1 a CA-16.3 | CP-16.1 a CP-16.3 | ✅ 3/3 (CA-16.1 probado en WhatsApp real, 29 oct 2026) |
 
 **RNF transversales** (se verifican en todas las HU con la DoD y en la Fase 5): RNF-02 rendimiento, RNF-04 y RNF-05 seguridad, RNF-06 compatibilidad, RNF-09 versionado y RNF-10 costo.
