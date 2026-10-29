@@ -1,0 +1,1000 @@
+/* =========================================================
+   Estilos de la página de Sebastián González
+   Orden del archivo:
+     1. Variables (colores, letras, espacios)  → arquitectura.md §4
+     2. Base (lo que aplica a toda la página)
+     3. Utilidades (piezas reutilizables)
+     4. Encabezado
+     5. Secciones
+     6. Pie de página
+     7. Pantallas más grandes (tablet y computador)
+   Regla: se escribe primero para celular y luego se AGREGA
+   lo de pantallas grandes con @media (min-width: ...).
+   ========================================================= */
+
+
+/* ---------- 1. VARIABLES · tono Bosque (ADR-007) ---------- */
+/* Para cambiar un color en toda la página, se cambia SOLO aquí. */
+:root {
+  /* Colores (contrastes verificados con WCAG 2.1) */
+  --color-primario: #1F4D3A;      /* verde bosque · 9,6:1 con texto blanco */
+  --color-texto: #1C2620;         /* 14,3:1 sobre el fondo */
+  --color-texto-suave: #4B5A52;   /* 6,7:1 sobre el fondo */
+  --color-fondo: #F7F5EF;         /* crema */
+  --color-fondo-alterno: #ECEEE3; /* secciones alternas */
+  --color-acento: #B7791F;        /* dorado: SOLO adornos, NUNCA texto (CA-00.6) */
+  --color-borde: #5F6F66;         /* bordes de campos · 4,9:1 */
+  --color-error: #B42318;         /* mensajes de error · 6,0:1 */
+  --color-blanco: #FFFFFF;
+
+  /* Letras: fuentes que ya trae cada dispositivo (ADR-005) */
+  --fuente: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fuente-titulos: Georgia, "Times New Roman", serif;
+  --texto-base: 1rem;                          /* 16 px */
+  --titulo-1: clamp(2.1rem, 7vw, 3.5rem);      /* crece con la pantalla, entre un mínimo y un máximo */
+  --titulo-2: clamp(1.5rem, 4.5vw, 2.25rem);
+  --titulo-3: 1.25rem;
+
+  /* Espacios: una sola escala para que todo se vea ordenado */
+  --espacio-1: 4px;
+  --espacio-2: 8px;
+  --espacio-3: 16px;
+  --espacio-4: 24px;
+  --espacio-5: 48px;
+  --espacio-6: 80px;
+
+  /* Medidas */
+  --ancho-max: 1100px;  /* el contenido no se estira más que esto en pantallas grandes */
+  --toque-min: 44px;    /* tamaño mínimo para tocar con el dedo */
+  --radio: 16px;        /* tarjetas */
+  --radio-pildora: 999px; /* botones redondeados */
+  --alto-encabezado: 68px;
+  --tamano-flotante: 56px; /* botón flotante de WhatsApp: más grande que el mínimo de 44 px */
+}
+
+
+/* ---------- 2. BASE ---------- */
+
+/* box-sizing: el ancho de una caja INCLUYE su borde y su relleno.
+   Evita que las cajas se salgan de la pantalla (CA-00.2). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Al ir a #servicios, deja espacio para que el encabezado fijo no tape el título */
+  scroll-padding-top: calc(var(--alto-encabezado) + var(--espacio-3));
+}
+
+/* Desplazamiento suave, solo si la persona no pidió "reducir movimiento" en su dispositivo */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: var(--texto-base);
+  line-height: 1.6;
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+  overflow-wrap: break-word; /* palabras muy largas se parten en vez de salirse */
+}
+
+h1, h2, h3 {
+  font-family: var(--fuente-titulos);
+  line-height: 1.15;
+  color: var(--color-texto);
+  margin: 0 0 var(--espacio-3);
+}
+h1 { font-size: var(--titulo-1); }
+h2 { font-size: var(--titulo-2); }
+h3 { font-size: var(--titulo-3); }
+
+/* La palabra destacada de un título va en cursiva verde: "hecha con <em>cuidado</em>" */
+h1 em, h2 em {
+  font-style: italic;
+  color: var(--color-primario);
+}
+
+p { margin: 0 0 var(--espacio-3); }
+
+img, svg {
+  max-width: 100%; /* una imagen nunca es más ancha que su contenedor */
+  height: auto;
+  display: block;
+}
+
+a { color: var(--color-primario); }
+
+/* Contorno visible al navegar con teclado (RNF-03).
+   :focus-visible solo aparece con teclado, no al tocar con el dedo. */
+:focus-visible {
+  outline: 3px solid var(--color-primario);
+  outline-offset: 3px;
+}
+
+/* <main> recibe el foco desde "Saltar al contenido"; no necesita contorno */
+main:focus { outline: none; }
+
+
+/* ---------- 3. UTILIDADES ---------- */
+
+/* Centra el contenido y le da margen a los lados en celular */
+.contenedor {
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding-inline: var(--espacio-3);
+}
+
+/* Enlace "Saltar al contenido" (CA-00.3):
+   escondido fuera de la pantalla hasta que recibe el foco con Tab */
+.saltar {
+  position: absolute;
+  left: var(--espacio-3);
+  top: -100px;
+  z-index: 100;
+  padding: var(--espacio-2) var(--espacio-3);
+  background: var(--color-primario);
+  color: var(--color-blanco);
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.saltar:focus {
+  top: var(--espacio-2);
+}
+
+/* Texto solo para lectores de pantalla: existe para el lector, pero no ocupa espacio en pantalla.
+   (No se usa display:none porque eso también lo esconde del lector.) */
+.solo-lector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Marca de contenido pendiente. Solo en la versión de prueba: debe desaparecer antes de publicar. */
+.pendiente {
+  display: inline-block;
+  padding: var(--espacio-1) var(--espacio-2);
+  border: 1px dashed var(--color-borde);
+  border-radius: 6px;
+  color: var(--color-texto-suave);
+  font-size: 0.875rem;
+}
+
+
+/* Botones: enlaces con forma de píldora y área de toque de al menos 44 px */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-2);
+  min-height: var(--toque-min);
+  padding: 10px var(--espacio-4);
+  border-radius: var(--radio-pildora);
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+/* Principal: verde de la marca con texto blanco (9,6:1). También es el de WhatsApp. */
+.boton--principal {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+.boton--principal:hover { background-color: #173D2E; } /* un poco más oscuro al pasar el mouse */
+
+/* Secundario: solo borde */
+.boton--borde {
+  border: 2px solid var(--color-primario);
+  color: var(--color-primario);
+}
+.boton--borde:hover { background-color: var(--color-fondo-alterno); }
+
+.boton__icono {
+  width: 20px;
+  height: 20px;
+  fill: currentColor; /* toma el mismo color del texto del botón */
+  flex-shrink: 0;
+}
+
+
+/* ---------- 4. ENCABEZADO ---------- */
+
+/* position: sticky = se queda pegado arriba al bajar por la página */
+.encabezado {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--color-fondo);
+  border-bottom: 1px solid var(--color-fondo-alterno);
+}
+
+.encabezado__fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--alto-encabezado);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  min-height: var(--toque-min);
+  font-weight: 700;
+  color: var(--color-primario);
+  text-decoration: none;
+}
+
+/* Logo de Gonztech (CC-10): tigre + nombre. El eslogan aparece solo en computador (ver §7). */
+.marca__logo {
+  width: 50px;
+  height: 40px;
+  flex-shrink: 0;
+}
+.marca__texto { display: flex; flex-direction: column; gap: 4px; }
+.marca__nombre { width: auto; height: 16px; }
+.marca__eslogan { display: none; width: auto; height: 9px; }
+
+/* Enlace "← Volver" de las páginas secundarias: corto para que quepa al lado del nombre en celular */
+.enlace-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-1);
+  min-height: var(--toque-min);
+  padding: 0 var(--espacio-2);
+  font-weight: 600;
+  color: var(--color-primario);
+  text-decoration: none;
+}
+.enlace-volver:hover { text-decoration: underline; }
+
+/* ----- Menú (HU-04) ----- */
+
+/* SIN JavaScript: los enlaces se muestran siempre, en una fila que baja de renglón si no cabe (CA-04.5) */
+.encabezado__fila { flex-wrap: wrap; }
+
+/* Sin JavaScript el encabezado es más alto (dos filas de enlaces); si siguiera pegado arriba
+   taparía los títulos al saltar a una sección. Por eso, sin JS, no se queda pegado. */
+html:not(.js) .encabezado { position: static; }
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--espacio-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  min-height: var(--toque-min); /* área de toque de 44 px */
+  color: var(--color-texto);
+  text-decoration: none;
+}
+.menu a:hover { color: var(--color-primario); text-decoration: underline; }
+
+/* Botón del menú en celular */
+.menu-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  min-height: var(--toque-min);
+  padding: 0 var(--espacio-3);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pildora);
+  background: none;
+  color: var(--color-primario);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.menu-boton[hidden] { display: none; } /* respeta el atributo hidden aunque arriba diga display */
+.menu-boton__icono { width: 20px; height: 20px; }
+
+/* CON JavaScript, en celular: la lista se esconde y aparece como un panel debajo del encabezado */
+.js .menu {
+  display: none;
+}
+.js .menu.menu--abierto {
+  display: flex;
+  flex-direction: column;
+  position: absolute; /* se ubica respecto al encabezado (que es sticky) */
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: var(--espacio-2) var(--espacio-3) var(--espacio-3);
+  background-color: var(--color-fondo);
+  border-bottom: 1px solid var(--color-fondo-alterno);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+.js .menu.menu--abierto a {
+  border-bottom: 1px solid var(--color-fondo-alterno);
+}
+
+
+/* ---------- 5. SECCIONES ---------- */
+
+.seccion {
+  padding-block: var(--espacio-5);
+}
+
+/* Fondo alterno para separar visualmente una sección de la siguiente */
+.seccion--alterna {
+  background-color: var(--color-fondo-alterno);
+}
+
+/* Párrafo corto debajo del título de una sección */
+.seccion__intro {
+  color: var(--color-texto-suave);
+  max-width: 60ch;
+  margin-bottom: var(--espacio-4);
+}
+
+/* ----- Tarjetas (Servicios HU-05; se reutilizan en otras secciones) ----- */
+/* Grid: en celular una columna; en pantallas más anchas, 2 y 3 columnas (ver §7) */
+.tarjetas {
+  display: grid;
+  gap: var(--espacio-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tarjeta {
+  background-color: var(--color-fondo);
+  border-top: 4px solid var(--color-primario);
+  border-radius: var(--radio);
+  padding: var(--espacio-4);
+}
+.tarjeta h3 { margin-bottom: var(--espacio-2); }
+.tarjeta p { margin: 0; color: var(--color-texto-suave); }
+.tarjeta .pendiente { margin-top: var(--espacio-3); }
+
+/* Tarjeta destacada (NFC): fondo verde muy claro y ocupa todas las columnas del grid */
+.tarjeta--destacada {
+  grid-column: 1 / -1; /* "de la primera a la última columna" */
+  background-color: var(--color-fondo);
+  border: 2px solid var(--color-primario);
+  border-top-width: 4px;
+}
+/* ".tarjeta .tarjeta__nota" pesa más que ".tarjeta p", así le gana al margin: 0 de arriba */
+.tarjeta .tarjeta__nota {
+  margin-top: var(--espacio-2);
+  font-size: 0.875rem;
+}
+
+/* Bloque "¿Necesita algo más grande?" debajo de las tarjetas de Servicios */
+.servicios__mas {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  margin-top: var(--espacio-4);
+  padding: var(--espacio-4);
+  border: 2px dashed var(--color-borde);
+  border-radius: var(--radio);
+}
+.servicios__mas h3 { margin-bottom: var(--espacio-2); }
+.servicios__mas p { margin: 0; color: var(--color-texto-suave); max-width: 60ch; }
+
+/* Íconos de línea: se dibujan con el borde (stroke), no con relleno */
+.tarjeta__icono {
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--espacio-3);
+  fill: none;
+  stroke: var(--color-primario);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- Compromisos (Cómo trabajo, HU-06) ----- */
+.compromisos {
+  display: grid;
+  gap: var(--espacio-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cada compromiso deja espacio a la izquierda para el check */
+.compromiso {
+  position: relative;
+  padding-left: calc(36px + var(--espacio-3));
+}
+
+/* El check verde en círculo se dibuja con CSS (::before), sin imágenes.
+   Es decorativo: el lector de pantalla no lo lee. */
+.compromiso::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--color-primario);
+  /* Un check blanco dibujado como imagen SVG dentro del CSS */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 12.5 4 4 8-9' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 22px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.compromiso h3 { margin-bottom: var(--espacio-1); }
+.compromiso p { margin: 0; color: var(--color-texto-suave); }
+
+/* ----- Proceso (HU-07): línea de tiempo ----- */
+/* counter-reset crea un contador llamado "paso" que empieza en 0 */
+.proceso {
+  list-style: none; /* quitamos los números normales; ponemos los nuestros en círculos */
+  margin: 0;
+  padding: 0;
+  counter-reset: paso;
+}
+
+/* En celular: pasos uno debajo del otro, con el círculo a la izquierda (CA-07.2) */
+.paso {
+  position: relative;
+  padding-left: calc(44px + var(--espacio-3));
+  padding-bottom: var(--espacio-4);
+  counter-increment: paso; /* cada paso suma 1 al contador */
+}
+.paso:last-child { padding-bottom: 0; }
+
+/* El círculo con el número */
+.paso::before {
+  content: counter(paso); /* muestra el valor del contador: 1, 2, 3… */
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* La línea que une un círculo con el siguiente (no va en el último paso) */
+.paso:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 21px;   /* centro del círculo: 44 / 2 − 1 */
+  top: 44px;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--color-acento); /* dorado: es solo un adorno, no texto (CA-00.6) */
+}
+
+.paso h3 { margin-bottom: var(--espacio-1); padding-top: 8px; }
+.paso p { margin: 0; color: var(--color-texto-suave); }
+
+/* ----- Proyectos (HU-08) ----- */
+.proyectos {
+  display: grid;
+  gap: var(--espacio-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.proyecto {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* para que la imagen respete las esquinas redondeadas */
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-fondo-alterno);
+  border-radius: var(--radio);
+}
+
+/* Zona de la imagen: misma altura en todas las tarjetas */
+.proyecto__imagen {
+  aspect-ratio: 16 / 10;
+  background-color: var(--color-primario);
+}
+.proyecto__imagen > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Variante con 3 capturas de celular, una al lado de la otra */
+.proyecto__imagen--celulares {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4%;
+  padding: 5% 6% 0;
+  overflow: hidden;
+  background-color: var(--color-fondo-alterno);
+}
+.proyecto__imagen--celulares > img {
+  width: 30%;
+  height: auto;
+  align-self: flex-start;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+/* La del medio un poco más arriba, para que se vea como un abanico */
+.proyecto__imagen--celulares > img:nth-child(2) { margin-top: -3%; }
+
+.proyecto__texto { padding: var(--espacio-4); }
+.proyecto__texto h3 { margin-bottom: var(--espacio-3); }
+.proyecto__texto p { color: var(--color-texto-suave); margin-bottom: var(--espacio-2); }
+.proyecto__texto p:last-child { margin-bottom: 0; }
+.proyecto__texto strong { color: var(--color-texto); }
+
+/* Etiqueta pequeña sobre el título: "Demo · Restaurante".
+   ".proyecto__texto .proyecto__etiqueta" le gana al color de ".proyecto__texto p" */
+.proyecto__texto .proyecto__etiqueta {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primario);
+}
+
+/* Enlace "Ver las pantallas" al final del texto de una tarjeta de proyecto (HU-09) */
+.proyecto__texto .boton { margin-top: var(--espacio-3); }
+
+/* ----- Página de detalle de un proyecto (HU-09) ----- */
+.proyecto__etiqueta-sola {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primario);
+}
+
+/* Las pantallas: 1 columna en celular, 2 en tablet y 4 en computador (ver §7) */
+.pantallas {
+  display: grid;
+  gap: var(--espacio-5) var(--espacio-4);
+  list-style: none;
+  margin: 0 0 var(--espacio-5);
+  padding: 0;
+}
+.pantalla img {
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
+  margin-bottom: var(--espacio-3);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+.pantalla h2 { font-size: var(--titulo-3); margin-bottom: var(--espacio-1); }
+.pantalla p { margin: 0; color: var(--color-texto-suave); }
+
+/* Título de un bloque que no es una sección completa */
+.titulo-pequeno { font-size: var(--titulo-3); margin-bottom: var(--espacio-2); }
+
+/* ----- Portada (HU-01) ----- */
+/* En celular: una columna. Primero el texto (lo importante) y el emblema debajo. */
+.portada {
+  padding-top: var(--espacio-4);
+}
+
+.portada__grid {
+  display: grid;
+  gap: var(--espacio-5);
+  align-items: center;
+}
+
+.portada__linea {
+  color: var(--color-texto-suave);
+  font-weight: 600;
+}
+
+.portada__frase {
+  font-size: 1.2rem;
+  max-width: 34ch; /* "ch" = ancho de un carácter: líneas de unas 34 letras se leen mejor */
+}
+
+.portada__acciones {
+  display: flex;
+  flex-wrap: wrap; /* si no caben lado a lado, el segundo botón baja */
+  gap: var(--espacio-3);
+  margin-top: var(--espacio-4);
+}
+
+.portada__emblema {
+  width: 100%;
+  max-width: 280px;
+  justify-self: center;
+}
+
+
+/* ----- Sobre mí (HU-10) ----- */
+/* En celular: el emblema pequeño arriba, como firma, y el texto debajo. */
+.sobre-mi {
+  display: grid;
+  gap: var(--espacio-4);
+}
+
+.sobre-mi__emblema {
+  width: 100%;
+  max-width: 160px; /* más pequeño que en la portada para no repetirlo igual */
+}
+
+.sobre-mi__entrada {
+  font-family: var(--fuente-titulos);
+  font-size: 1.25rem;
+  color: var(--color-texto);
+}
+
+.sobre-mi__lista {
+  display: grid;
+  gap: var(--espacio-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sobre-mi__lista strong { color: var(--color-texto); }
+/* Líneas de máximo unas 65 letras: en computador el texto no se estira de lado a lado */
+.sobre-mi > div { max-width: 65ch; }
+
+
+/* ----- Contacto (HU-11) ----- */
+/* En celular: una tarjeta debajo de la otra. Desde 768 px: las dos lado a lado (ver §7). */
+.contacto__medios {
+  display: grid;
+  gap: var(--espacio-3);
+  list-style: none;
+  margin: 0 0 var(--espacio-5);
+  padding: 0;
+}
+.contacto__medio { display: flex; flex-direction: column; align-items: flex-start; gap: var(--espacio-2); }
+.contacto__medio h3 { margin: 0; }
+/* El dato se ve grande y se puede seleccionar y copiar (CA-11.3).
+   overflow-wrap: si el correo no cabe en un celular angosto, se parte en vez de salirse de la tarjeta */
+.contacto__dato {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-texto);
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+.contacto__medio .boton { margin-top: var(--espacio-2); }
+
+
+/* ----- Formulario (HU-12 y HU-13) ----- */
+.formulario-caja {
+  max-width: 640px;
+  padding: var(--espacio-4);
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-fondo-alterno);
+  border-radius: var(--radio);
+}
+.formulario-caja h3 { margin-bottom: var(--espacio-1); }
+.formulario__intro { color: var(--color-texto-suave); margin-bottom: var(--espacio-4); }
+
+.formulario { display: grid; gap: var(--espacio-4); }
+
+.campo { display: grid; gap: var(--espacio-1); }
+.campo label { font-weight: 600; color: var(--color-texto); }
+.campo__nota { font-weight: 400; color: var(--color-texto-suave); font-size: 0.9em; }
+.campo__ayuda { margin: 0; font-size: 0.875rem; color: var(--color-texto-suave); }
+
+/* Campos: borde de 4,9:1 (mínimo 3:1 para controles), 44 px de alto y letra de 16 px:
+   con menos de 16 px, el iPhone hace zoom solo al tocar el campo */
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  min-height: var(--toque-min);
+  padding: 10px 12px;
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+  background-color: var(--color-blanco);
+  color: var(--color-texto);
+  font: inherit;
+  font-size: 1rem;
+}
+.campo textarea { resize: vertical; min-height: 140px; }
+
+/* Campo con error: borde rojo más grueso, no solo el color (WCAG 1.4.1: el error también se dice con texto) */
+.campo [aria-invalid="true"] { border: 2px solid var(--color-error); }
+.campo__error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Casilla de autorización: la casilla a la izquierda y el texto al lado */
+.campo--casilla { grid-template-columns: auto 1fr; align-items: start; column-gap: var(--espacio-2); }
+.campo--casilla input {
+  width: 24px;
+  min-height: 24px;
+  height: 24px;
+  margin: 2px 0 0;
+  accent-color: var(--color-primario);
+}
+.campo--casilla label { font-weight: 400; }
+.campo--casilla .campo__error { grid-column: 1 / -1; }
+
+.formulario__enviar { justify-self: start; }
+.formulario__enviar[disabled] { opacity: 0.7; cursor: wait; }
+
+/* Resultado del envío: verde si salió bien, rojo si falló */
+.formulario__estado:empty { display: none; }
+.formulario__estado {
+  padding: var(--espacio-3);
+  border-radius: 10px;
+  font-weight: 600;
+}
+.formulario__estado--exito { background-color: var(--color-fondo-alterno); color: var(--color-primario); }
+.formulario__estado--error { background-color: #FBEAE8; color: var(--color-error); }
+.formulario__estado a { color: inherit; }
+
+/* Campo trampa contra robots: fuera de la vista de todos (CA-12.7) */
+.trampa { display: none; }
+
+
+/* ---------- 6. PIE DE PÁGINA ---------- */
+
+.pie {
+  padding-block: var(--espacio-4);
+  /* Espacio extra abajo para que el botón flotante nunca tape el final del pie (CA-03.2) */
+  padding-bottom: calc(var(--tamano-flotante) + var(--espacio-5));
+  border-top: 1px solid var(--color-fondo-alterno);
+  color: var(--color-texto-suave);
+  font-size: 0.9rem;
+}
+
+/* En celular: una cosa debajo de la otra. En pantallas anchas: a los dos lados (ver §7). */
+.pie__fila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+.pie p { margin: 0; }
+
+/* Logo completo arriba y la línea con el nombre de Sebastián debajo (CA-15.1) */
+.pie__marca {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  font-weight: 600;
+  color: var(--color-texto);
+}
+.pie__logo { display: flex; align-items: center; gap: var(--espacio-2); }
+.pie__logo > img { width: 60px; height: 48px; flex-shrink: 0; }
+.pie__logo-texto { display: flex; flex-direction: column; gap: 5px; }
+.pie__logo-texto img { width: 158px; height: auto; }
+
+/* El enlace del aviso se agranda por dentro para que el área de toque sea de 44 px */
+.pie__legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque-min);
+}
+
+
+/* ---------- BOTÓN FLOTANTE DE WHATSAPP (HU-03) ---------- */
+
+/* position: fixed = se queda en el mismo lugar de la pantalla aunque la persona baje */
+.whatsapp-flotante {
+  position: fixed;
+  right: var(--espacio-3);
+  /* env(safe-area-inset-bottom): en iPhone sin botón de inicio, evita la barra inferior del sistema */
+  bottom: calc(var(--espacio-3) + env(safe-area-inset-bottom, 0px));
+  z-index: 40; /* por encima del contenido, por debajo del encabezado y su menú (50) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tamano-flotante);
+  height: var(--tamano-flotante);
+  border-radius: 50%;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+.whatsapp-flotante:hover { background-color: #173D2E; }
+.whatsapp-flotante svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+/* Escondido en Contacto y en el pie (lo controla main.js).
+   visibility: hidden también lo saca del recorrido con Tab, así el teclado no llega a un botón invisible. */
+.whatsapp-flotante--oculto {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+}
+
+/* Animación suave al aparecer y desaparecer, solo si la persona no pidió reducir el movimiento */
+@media (prefers-reduced-motion: no-preference) {
+  .whatsapp-flotante {
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+}
+
+
+/* ---------- AVISO DE PRIVACIDAD (HU-14, CC-08) ---------- */
+/* Texto largo: líneas de 70 caracteres como máximo para que se lea cómodo */
+.legal > * { max-width: 70ch; }
+.legal section { margin-top: var(--espacio-4); }
+.legal h2 { font-size: var(--titulo-3); }
+.legal ul { padding-left: var(--espacio-4); }
+.legal li + li { margin-top: var(--espacio-1); }
+.legal__politica {
+  margin-top: var(--espacio-5);
+  padding-top: var(--espacio-4);
+  border-top: 1px solid var(--color-fondo-alterno);
+}
+.legal__politica h2 { font-size: var(--titulo-2); }
+.legal__puntos { padding-left: var(--espacio-4); }
+.legal__puntos > li + li { margin-top: var(--espacio-4); }
+.legal__puntos h3 { margin-bottom: var(--espacio-1); }
+
+/* ---------- ANIMACIONES SUAVES (CC-11) ---------- */
+/* Todo va dentro de "no-preference": si la persona pidió "reducir movimiento" en su celular,
+   no se anima nada y la página se ve completa de una vez (WCAG 2.3.3). */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* 1. Portada: el texto sube suave, uno detrás de otro, y el emblema aparece después.
+        "both" deja el estado final aunque la animación termine. */
+  .portada__texto > * { animation: subir 0.6s ease-out both; }
+  .portada__texto > :nth-child(2) { animation-delay: 0.1s; }
+  .portada__texto > :nth-child(3) { animation-delay: 0.2s; }
+  .portada__texto > :nth-child(4) { animation-delay: 0.3s; }
+  .portada__emblema { animation: aparecer 0.8s 0.35s ease-out both; }
+
+  /* 2. Al bajar: main.js marca con .revelar lo que está más abajo y le suma .revelar--visto
+        cuando entra a la pantalla. Sin JavaScript nada tiene .revelar: todo se ve normal. */
+  /* "main .revelar" pesa más que .tarjeta y .proyecto, así su transición no pisa esta */
+  main .revelar {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  main .revelar--visto { opacity: 1; transform: none; }
+
+  /* 3. Botones y tarjetas reaccionan al pasar el mouse.
+        (hover: hover) = solo en equipos con mouse; en celular el toque no deja la tarjeta "levantada". */
+  .boton { transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+  .tarjeta,
+  .proyecto { transition: transform 0.25s ease-out, box-shadow 0.25s ease-out; }
+
+  @media (hover: hover) {
+    .boton:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(31, 77, 58, 0.25); }
+    .tarjeta:hover,
+    .proyecto:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(31, 77, 58, 0.14); }
+  }
+}
+
+@keyframes subir {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: none; }
+}
+
+
+/* ---------- 7. PANTALLAS MÁS GRANDES ---------- */
+
+/* Tablet: desde 768 px */
+@media (min-width: 768px) {
+  /* Portada en dos columnas: texto a la izquierda, emblema a la derecha */
+  .portada__grid { grid-template-columns: 1.4fr 1fr; }
+  .portada__emblema { max-width: 340px; }
+
+  /* Sobre mí: emblema a la izquierda y texto a la derecha */
+  .sobre-mi { grid-template-columns: 200px 1fr; gap: var(--espacio-5); align-items: start; }
+  .sobre-mi__emblema { max-width: 200px; }
+
+  /* Proyectos y pantallas del detalle en 2 columnas */
+  .proyectos,
+  .pantallas { grid-template-columns: repeat(2, 1fr); }
+
+  /* Contacto: WhatsApp y correo lado a lado */
+  .contacto__medios { grid-template-columns: repeat(2, 1fr); }
+
+  /* Tarjetas y compromisos en 2 columnas */
+  .tarjetas,
+  .compromisos { grid-template-columns: repeat(2, 1fr); }
+
+  /* Tarjeta destacada: ícono a la izquierda y texto a la derecha */
+  .tarjeta--destacada {
+    display: flex;
+    gap: var(--espacio-4);
+    align-items: flex-start;
+  }
+  .tarjeta--destacada .tarjeta__icono { flex-shrink: 0; margin-bottom: 0; width: 48px; height: 48px; }
+
+  /* "¿Necesita algo más grande?": texto a la izquierda, botón a la derecha */
+  .servicios__mas {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .servicios__mas .boton { flex-shrink: 0; }
+
+  /* Pie: marca a la izquierda, año y aviso a la derecha */
+  .pie__fila {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Computador: desde 1024 px */
+@media (min-width: 1024px) {
+  body { font-size: 1.125rem; } /* 18 px */
+
+  /* Encabezado: el nombre más grande y el eslogan debajo, que aquí sí se lee */
+  .marca__nombre { height: 22px; }
+  .marca__eslogan { display: block; height: 12px; }
+
+  /* Tarjetas y compromisos en 3 columnas */
+  .tarjetas,
+  .compromisos { grid-template-columns: repeat(3, 1fr); }
+  .compromisos { gap: var(--espacio-5) var(--espacio-4); }
+
+  /* Pantallas del detalle: las 4 en una fila */
+  .pantallas { grid-template-columns: repeat(4, 1fr); }
+
+  /* Proceso: los 7 pasos en una fila, con la línea horizontal */
+  .proceso {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--espacio-3);
+  }
+  .paso {
+    padding-left: 0;
+    padding-top: calc(44px + var(--espacio-3));
+    padding-bottom: 0;
+  }
+  .paso h3 { font-size: 1.1rem; padding-top: 0; }
+  .paso p { font-size: 0.95rem; }
+  .paso:not(:last-child)::after {
+    left: 44px;                              /* empieza donde termina el círculo */
+    right: calc(-1 * var(--espacio-3));      /* y cruza el espacio hasta el siguiente paso */
+    top: 21px;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+  }
+
+  /* Menú horizontal siempre visible; el botón ya no hace falta */
+  .encabezado__fila { flex-wrap: nowrap; }
+  .menu-boton,
+  .menu-boton:not([hidden]) { display: none; }
+  .js .menu,
+  .js .menu.menu--abierto {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    gap: var(--espacio-4);
+  }
+  .js .menu.menu--abierto a { border-bottom: 0; }
+  .seccion { padding-block: var(--espacio-6); }
+}

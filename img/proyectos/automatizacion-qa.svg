@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="titulo">
+  <!-- Ilustración del flujo de automatización QA (HU-08). No muestra código ni datos reales. -->
+  <title id="titulo">Flujo automatizado: historia de usuario, casos de prueba generados con IA y certificación en PDF</title>
+  <rect width="640" height="400" fill="#1F4D3A"/>
+  <!-- Textura de líneas finas, como el emblema -->
+  <g fill="none" stroke="#F7F5EF" stroke-width="0.8" opacity="0.12">
+    <circle cx="320" cy="200" r="120"/><circle cx="320" cy="200" r="160"/><circle cx="320" cy="200" r="200"/><circle cx="320" cy="200" r="240"/><circle cx="320" cy="200" r="280"/>
+  </g>
+
+  <!-- Flechas entre los pasos (dorado: solo adorno) -->
+  <g fill="none" stroke="#B7791F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M196 200h44"/><path d="m230 190 10 10-10 10"/>
+    <path d="M400 200h44"/><path d="m434 190 10 10-10 10"/>
+  </g>
+
+  <!-- 1. Historia de usuario -->
+  <g transform="translate(46 120)">
+    <rect width="150" height="160" rx="16" fill="#F7F5EF"/>
+    <rect x="20" y="22" width="60" height="10" rx="5" fill="#1F4D3A"/>
+    <rect x="20" y="48" width="110" height="7" rx="3.5" fill="#4B5A52" opacity=".45"/>
+    <rect x="20" y="64" width="96" height="7" rx="3.5" fill="#4B5A52" opacity=".45"/>
+    <rect x="20" y="80" width="104" height="7" rx="3.5" fill="#4B5A52" opacity=".45"/>
+    <rect x="20" y="96" width="70" height="7" rx="3.5" fill="#4B5A52" opacity=".45"/>
+    <text x="75" y="140" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#1C2620">Historia</text>
+  </g>
+
+  <!-- 2. Casos de prueba generados por IA -->
+  <g transform="translate(245 104)">
+    <rect width="150" height="192" rx="16" fill="#F7F5EF"/>
+    <!-- chispa de IA -->
+    <path d="M118 18l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#B7791F"/>
+    <g font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+      <g transform="translate(20 40)">
+        <circle cx="9" cy="9" r="9" fill="#1F4D3A"/><path d="m5 9 3 3 6-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="26" y="5" width="84" height="8" rx="4" fill="#4B5A52" opacity=".45"/>
+      </g>
+      <g transform="translate(20 72)">
+        <circle cx="9" cy="9" r="9" fill="#1F4D3A"/><path d="m5 9 3 3 6-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="26" y="5" width="72" height="8" rx="4" fill="#4B5A52" opacity=".45"/>
+      </g>
+      <g transform="translate(20 104)">
+        <circle cx="9" cy="9" r="9" fill="#1F4D3A"/><path d="m5 9 3 3 6-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="26" y="5" width="80" height="8" rx="4" fill="#4B5A52" opacity=".45"/>
+      </g>
+      <text x="75" y="168" text-anchor="middle" font-size="14" font-weight="700" fill="#1C2620">Casos con IA</text>
+    </g>
+  </g>
+
+  <!-- 3. Certificación en PDF con sello -->
+  <g transform="translate(444 120)">
+    <rect width="150" height="160" rx="16" fill="#F7F5EF"/>
+    <rect x="20" y="22" width="80" height="10" rx="5" fill="#1F4D3A"/>
+    <rect x="20" y="46" width="110" height="7" rx="3.5" fill="#4B5A52" opacity=".45"/>
+    <rect x="20" y="62" width="90" height="7" rx="3.5" fill="#4B5A52" opacity=".45"/>
+    <circle cx="110" cy="96" r="18" fill="none" stroke="#1F4D3A" stroke-width="3"/>
+    <path d="m102 96 6 6 11-12" fill="none" stroke="#1F4D3A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="75" y="140" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#1C2620">Certificación</text>
+  </g>
+</svg>

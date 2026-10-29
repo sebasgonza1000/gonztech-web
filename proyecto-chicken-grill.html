@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema de pedidos para Chicken &amp; Grill – Gonztech</title>
+  <meta name="description" content="Demo de un sistema de pedidos por celular para un asadero: menú con fotos, opciones por plato, carrito y confirmación por WhatsApp.">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <!-- Página de detalle del proyecto (HU-09). Se abre desde la tarjeta de Proyectos en una pestaña nueva.
+       Permiso de Chicken & Grill confirmado (RC-04, docs/descubrimiento.md). -->
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="encabezado">
+    <div class="contenedor encabezado__fila">
+      <a class="marca" href="index.html">
+        <img class="marca__logo" src="img/logo-tigre.svg" alt="" width="50" height="40">
+        <!-- Nombre y eslogan calcados de la imagen de Sebastián (CC-10). El eslogan solo se ve en computador:
+             en celular quedaría de unos 5 px y no se leería. -->
+        <span class="marca__texto">
+          <img class="marca__nombre" src="img/nombre.svg" alt="Gonztech" width="140" height="16">
+          <img class="marca__eslogan" src="img/eslogan.svg" alt="Tecnología que impulsa" width="140" height="9">
+        </span>
+      </a>
+      <a class="enlace-volver" href="index.html#proyectos"><span aria-hidden="true">←</span> Volver<span class="solo-lector"> a proyectos</span></a>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <section class="seccion" aria-labelledby="titulo-proyecto">
+      <div class="contenedor">
+        <p class="proyecto__etiqueta-sola">Demo · Restaurante</p>
+        <h1 id="titulo-proyecto">Sistema de pedidos para <em>Chicken &amp; Grill</em></h1>
+        <p class="seccion__intro">Así arma su pedido un cliente del asadero desde el celular, sin hacer la llamada. Son cuatro pasos.</p>
+
+        <!-- Las 4 pantallas en el orden en que las usa el cliente. <ol> porque el orden importa. -->
+        <ol class="pantallas" role="list">
+          <li class="pantalla">
+            <img src="img/proyectos/asadero-1-menu.jpg" alt="Menú con las categorías Pollos, Combos, Platos y Parrilla, fotos de cada plato y su precio" width="554" height="1200" loading="lazy">
+            <h2>1. Ve el menú</h2>
+            <p>Categorías, fotos y precios claros. Puede escoger domicilio o recoger en el local.</p>
+          </li>
+          <li class="pantalla">
+            <img src="img/proyectos/asadero-2-producto.jpg" alt="Detalle del pollo asado con cuatro opciones de acompañamiento y la marca de obligatorio" width="554" height="1200" loading="lazy">
+            <h2>2. Arma su plato</h2>
+            <p>Escoge el acompañamiento obligatorio y deja notas como "sin ají". No se le olvida nada.</p>
+          </li>
+          <li class="pantalla">
+            <img src="img/proyectos/asadero-3-pedido.jpg" alt="Resumen del pedido con subtotal, empaque, domicilio y total a pagar" width="554" height="1200" loading="lazy">
+            <h2>3. Revisa el pedido</h2>
+            <p>Ve el subtotal, el empaque, el domicilio y el total antes de confirmar.</p>
+          </li>
+          <li class="pantalla">
+            <img src="img/proyectos/asadero-4-whatsapp.jpg" alt="Pedido confirmado y mensaje automático de WhatsApp con el detalle y el total" width="554" height="1200" loading="lazy">
+            <h2>4. Recibe la confirmación</h2>
+            <p>El pedido llega completo y el cliente recibe la confirmación automática por WhatsApp.</p>
+          </li>
+        </ol>
+
+        <!-- Llamado a la acción: usa el ENLACE OFICIAL de WhatsApp (CA-02.4) -->
+        <div class="servicios__mas">
+          <div>
+            <h2 class="titulo-pequeno">¿Quiere algo así para su negocio?</h2>
+            <p>Cuénteme cómo reciben hoy los pedidos y le digo qué se puede hacer.</p>
+          </div>
+          <a class="boton boton--principal"
+             href="https://wa.me/573175680756?text=Hola%20Sebasti%C3%A1n%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20hablar%20sobre%20mi%20negocio."
+             target="_blank" rel="noopener">
+            Escríbame por WhatsApp
+            <span class="solo-lector">(se abre en una pestaña nueva)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__fila">
+      <!-- Logo completo, como en la imagen de Sebastián: tigre, nombre y eslogan (CC-10) -->
+      <div class="pie__marca">
+        <div class="pie__logo">
+          <img src="img/logo-tigre.svg" alt="" width="60" height="48">
+          <span class="pie__logo-texto">
+            <img src="img/nombre.svg" alt="Gonztech" width="158" height="18">
+            <img src="img/eslogan.svg" alt="Tecnología que impulsa" width="158" height="10">
+          </span>
+        </div>
+        <p>Gonztech · Sebastián González – Desarrollo web y calidad de software</p>
+      </div>
+      <p class="pie__legal">
+        © <span id="anio">2026</span> ·
+        <a href="privacidad.html">Aviso de privacidad</a>
+      </p>
+    </div>
+  </footer>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

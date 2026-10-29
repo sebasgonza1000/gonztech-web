@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mensaje recibido – Gonztech</title>
+  <!-- Página de confirmación: no tiene sentido que aparezca en Google -->
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <!-- Confirmación del formulario cuando se envía SIN JavaScript (HU-12, arquitectura.md §2).
+       Con JavaScript, el mensaje de confirmación aparece dentro de la misma página. -->
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="encabezado">
+    <div class="contenedor encabezado__fila">
+      <a class="marca" href="index.html">
+        <img class="marca__logo" src="img/logo-tigre.svg" alt="" width="50" height="40">
+        <span class="marca__texto">
+          <img class="marca__nombre" src="img/nombre.svg" alt="Gonztech" width="140" height="16">
+          <img class="marca__eslogan" src="img/eslogan.svg" alt="Tecnología que impulsa" width="140" height="9">
+        </span>
+      </a>
+      <a class="enlace-volver" href="index.html"><span aria-hidden="true">←</span> Volver<span class="solo-lector"> al inicio</span></a>
+    </div>
+  </header>
+
+  <main id="contenido" class="seccion" tabindex="-1">
+    <div class="contenedor">
+      <h1>Gracias, recibí su mensaje.</h1>
+      <p class="seccion__intro">Le respondo pronto por el medio que me indicó.</p>
+      <p>Si es urgente, también puede escribirme por WhatsApp.</p>
+      <a class="boton boton--principal"
+         href="https://wa.me/573175680756?text=Hola%20Sebasti%C3%A1n%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20hablar%20sobre%20mi%20negocio."
+         target="_blank" rel="noopener">
+        Escríbame por WhatsApp
+        <span class="solo-lector">(se abre en una pestaña nueva)</span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>

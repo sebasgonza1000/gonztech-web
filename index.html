@@ -1,0 +1,497 @@
+<!doctype html>
+<!-- lang="es" le dice al navegador y a los lectores de pantalla que la página está en español -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <!-- Sin esta línea, el celular mostraría la página "encogida" como si fuera un computador -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gonztech | Desarrollo web y calidad de software</title>
+  <meta name="description" content="Páginas web, automatizaciones y presencia en Google para negocios en Colombia, probadas antes de entregarse y a nombre del cliente.">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <!-- Vista previa al compartir por WhatsApp y redes (HU-16). WhatsApp exige direcciones completas.
+       Dirección gratis de Netlify (CC-16): si Netlify asigna otro nombre o algún día se compra un dominio,
+       se cambian estas dos líneas (og:url y og:image). -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="Gonztech">
+  <meta property="og:title" content="Gonztech | Desarrollo web y calidad de software">
+  <meta property="og:description" content="Páginas web, automatizaciones y presencia en Google para negocios en Colombia, probadas antes de entregarse y a nombre del cliente.">
+  <meta property="og:url" content="https://gonztech.netlify.app/">
+  <meta property="og:image" content="https://gonztech.netlify.app/img/vista-previa.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logo de Gonztech: tigre con circuitos. Desarrollo web y calidad de software, por Sebastián González">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="css/estilos.css">
+  <!-- Marca que JavaScript está activo. Va aquí arriba para que el menú no "parpadee" al cargar.
+       Si no hay JavaScript, esta clase no existe y el menú se muestra abierto (CA-04.5). -->
+  <script>document.documentElement.classList.add('js');</script>
+  <!-- defer: el script se descarga en paralelo y se ejecuta cuando el HTML ya está listo -->
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <!-- CA-00.3: primer elemento al presionar Tab. Permite saltar el menú e ir directo al contenido -->
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===== ENCABEZADO ===== -->
+  <header class="encabezado">
+    <div class="contenedor encabezado__fila">
+      <a class="marca" href="#inicio">
+        <!-- alt="" en el tigre porque el nombre va al lado: así el lector de pantalla no lo repite -->
+        <img class="marca__logo" src="img/logo-tigre.svg" alt="" width="50" height="40">
+        <!-- Nombre y eslogan calcados de la imagen de Sebastián (CC-10). El eslogan solo se ve en computador:
+             en celular quedaría de unos 5 px y no se leería. -->
+        <span class="marca__texto">
+          <img class="marca__nombre" src="img/nombre.svg" alt="Gonztech" width="140" height="16">
+          <img class="marca__eslogan" src="img/eslogan.svg" alt="Tecnología que impulsa" width="140" height="9">
+        </span>
+      </a>
+      <!-- MENÚ (HU-04). aria-label da nombre a la navegación para el lector de pantalla -->
+      <nav class="navegacion" aria-label="Principal">
+        <!-- Botón del menú en celular.
+             hidden: sin JavaScript no sirve, así que no se muestra; main.js lo activa.
+             aria-expanded: le dice al lector de pantalla si el menú está abierto (true) o cerrado (false).
+             aria-controls: indica qué lista abre y cierra este botón. -->
+        <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu" hidden>
+          <svg class="menu-boton__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Menú
+        </button>
+        <ul class="menu" id="menu">
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#como">Cómo trabajo</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- tabindex="-1" permite que el enlace "Saltar al contenido" le pase el foco a <main> -->
+  <main id="contenido" tabindex="-1">
+
+    <!-- 1. PORTADA (HU-01) · textos revisados con las reglas RC-01 a RC-08 -->
+    <section id="inicio" class="seccion portada" aria-labelledby="titulo-inicio">
+      <div class="contenedor portada__grid">
+        <div class="portada__texto">
+          <!-- El título dice el beneficio; el nombre y la línea van justo debajo -->
+          <h1 id="titulo-inicio">Tecnología que <em>trabaja</em> para su negocio.</h1>
+          <p class="portada__linea">Por Sebastián González · Desarrollo web y calidad de software</p>
+          <p class="portada__frase">Páginas web, automatizaciones y presencia en Google, probadas antes de entregarse y a nombre de su negocio.</p>
+
+          <div class="portada__acciones">
+            <!-- ENLACE OFICIAL DE WHATSAPP (HU-02). Todos los botones de WhatsApp usan EXACTAMENTE este enlace (CA-02.4):
+                   https://wa.me/573175680756?text=Hola%20Sebasti%C3%A1n%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20hablar%20sobre%20mi%20negocio.
+                 - 57 = indicativo de Colombia; 3175680756 = celular sin espacios ni signos.
+                 - text = mensaje inicial "codificado": los espacios son %20, la "á" es %C3%A1 y la coma es %2C.
+                   Así llegan bien las tildes (CA-02.3).
+                 - target="_blank": en computador abre WhatsApp Web en otra pestaña y la página sigue abierta (CA-02.2).
+                 - rel="noopener": la pestaña nueva no puede controlar esta página (seguridad, RNF-04). -->
+            <a class="boton boton--principal"
+               href="https://wa.me/573175680756?text=Hola%20Sebasti%C3%A1n%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20hablar%20sobre%20mi%20negocio."
+               target="_blank" rel="noopener">
+              <svg class="boton__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+              Escríbame por WhatsApp
+              <!-- No se ve en pantalla, pero el lector de pantalla lo lee -->
+              <span class="solo-lector">(se abre en una pestaña nueva)</span>
+            </a>
+            <a class="boton boton--borde" href="#servicios">Ver servicios</a>
+          </div>
+        </div>
+
+        <!-- Emblema de identidad en lugar de foto (ADR-007).
+             width y height reservan el espacio y evitan que la página "salte" al cargar. -->
+        <img class="portada__emblema" src="img/emblema.svg"
+             alt="Emblema de Gonztech: tigre con circuitos sobre un arco verde"
+             width="264" height="304">
+      </div>
+    </section>
+
+    <!-- 2. SERVICIOS · HU-05 -->
+    <section id="servicios" class="seccion seccion--alterna" aria-labelledby="titulo-servicios">
+      <div class="contenedor">
+        <h2 id="titulo-servicios">Lo que puedo hacer por <em>su negocio</em></h2>
+        <p class="seccion__intro">Soluciones concretas, explicadas sin tecnicismos y a la medida de lo que su negocio necesita.</p>
+
+        <!-- 7 servicios (RF-05, CA-05.1). Es una lista <ul>: el lector de pantalla anuncia "lista de 5 elementos".
+             Textos revisados con las reglas: sin precios, sin "nunca se cae", sin promesas de cifras (RC-01, RC-05, RC-07). -->
+        <ul class="tarjetas" role="list">
+          <li class="tarjeta">
+            <!-- Ícono: pantalla de computador -->
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+            <h3>Páginas web institucionales</h3>
+            <p>Que sus clientes lo encuentren, sepan quién es y lo contacten con un toque.</p>
+          </li>
+          <li class="tarjeta">
+            <!-- Ícono: lista de productos -->
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+            <h3>Catálogos sin precios con cotización por WhatsApp</h3>
+            <p>Sus clientes eligen productos y cantidades, y le envían la lista por WhatsApp para que usted cotice.</p>
+          </li>
+          <li class="tarjeta">
+            <!-- Ícono: flechas en círculo (tareas que se repiten solas) -->
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 0 1-13.7 5.7M4 12a8 8 0 0 1 13.7-5.7"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
+            <h3>Automatizaciones e inteligencia artificial</h3>
+            <p>Menos trabajo manual: respuestas automáticas en WhatsApp, formularios que llegan solos a una hoja de cálculo y herramientas con inteligencia artificial que le ahorran tiempo en tareas del día a día.</p>
+            <!-- Ejemplos confirmados por Sebastián el 29 oct 2026 (CA-05.4, CC-14) -->
+          </li>
+          <li class="tarjeta">
+            <!-- Ícono: lupa con check (revisión de calidad). Es la experiencia de QA de Sebastián. -->
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/><path d="m7.8 10.6 1.9 1.9 3.4-3.6"/></svg>
+            <h3>Revisión y pruebas de su página o aplicación</h3>
+            <p>Reviso lo que ya tiene como lo hace un analista de calidad: encuentro errores, fallas en el celular y riesgos de seguridad antes de que los vean sus clientes.</p>
+          </li>
+          <li class="tarjeta">
+            <!-- Ícono: pin de ubicación -->
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <h3>Presencia en Google y Google Maps</h3>
+            <p>Que su negocio aparezca en Google y en Google Maps cuando lo buscan.</p>
+          </li>
+          <li class="tarjeta">
+            <!-- Ícono: escudo con check (página cuidada) -->
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+            <h3>Alojamiento y mantenimiento</h3>
+            <p>Su página en línea y a su nombre, con un plan de mantenimiento opcional para corregir errores y mantenerla al día.</p>
+          </li>
+          <!-- Tarjeta destacada: ocupa todo el ancho para que la séptima no quede "sola" en su fila -->
+          <li class="tarjeta tarjeta--destacada">
+            <!-- Ícono: celular con ondas (acercar y listo) -->
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="9" height="16" rx="2"/><path d="M8 18h1"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+            <div>
+              <h3>Placas y tarjetas NFC para reseñas en Google</h3>
+              <p>Una placa o tarjeta con un chip: su cliente acerca el celular y se abre directo la página para dejarle una reseña en Google, sin buscar ni escribir nada. Más reseñas hacen que más personas lo encuentren y confíen en su negocio.</p>
+              <p class="tarjeta__nota">Funciona con la mayoría de celulares actuales.</p>
+            </div>
+          </li>
+        </ul>
+
+        <!-- PROYECTOS MÁS GRANDES (CA-05.5). Abre la puerta sin prometer: cada caso se evalúa.
+             No se dice "contamos con un equipo" hasta que esté confirmado (RC-01). -->
+        <div class="servicios__mas">
+          <div>
+            <h3>¿Necesita algo más grande?</h3>
+            <p>Tiendas en línea con pasarelas de pago, sistemas a la medida y otros proyectos más complejos. Cuénteme qué necesita: lo evaluamos juntos y le digo con claridad qué se puede hacer, en qué tiempo y cómo.</p>
+          </div>
+          <a class="boton boton--principal"
+             href="https://wa.me/573175680756?text=Hola%20Sebasti%C3%A1n%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20hablar%20sobre%20mi%20negocio."
+             target="_blank" rel="noopener">
+            Cuénteme su proyecto
+            <span class="solo-lector">por WhatsApp (se abre en una pestaña nueva)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CÓMO TRABAJO · HU-06 -->
+    <section id="como" class="seccion" aria-labelledby="titulo-como">
+      <div class="contenedor">
+        <h2 id="titulo-como">Mis compromisos con <em>usted</em></h2>
+        <p class="seccion__intro">Lo que puede esperar de mí en cada proyecto, sin letra pequeña.</p>
+
+        <!-- 6 compromisos (RF-06, CA-06.1). Son los mismos de la carta de presentación. -->
+        <ul class="compromisos" role="list">
+          <li class="compromiso">
+            <h3>Todo a nombre del cliente</h3>
+            <p>El dominio, el alojamiento y los accesos quedan a su nombre. Su página es suya.</p>
+          </li>
+          <li class="compromiso">
+            <h3>Todo claro desde el inicio</h3>
+            <p>Antes de empezar sabe qué incluye, qué no incluye, cuánto tarda y cuánto cuesta. Sin sorpresas.</p>
+          </li>
+          <li class="compromiso">
+            <h3>Revisión en cada etapa</h3>
+            <p>Usted ve y aprueba cada avance antes de seguir con el siguiente paso.</p>
+          </li>
+          <li class="compromiso">
+            <h3>Pruebas antes de publicar</h3>
+            <p>Reviso su página en celular y computador, como analista de calidad, antes de que la vean sus clientes.</p>
+          </li>
+          <li class="compromiso">
+            <h3>Trato directo</h3>
+            <p>Habla conmigo, sin intermediarios, y le respondo por WhatsApp.</p>
+          </li>
+          <li class="compromiso">
+            <!-- CA-06.2: el soporte tiene límites claros (RC-06) -->
+            <h3>Soporte después de la entrega</h3>
+            <p>Corrijo los errores durante un periodo acordado. Si quiere, después seguimos con un plan de mantenimiento.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. PROCESO · HU-07 -->
+    <section id="proceso" class="seccion seccion--alterna" aria-labelledby="titulo-proceso">
+      <div class="contenedor">
+        <h2 id="titulo-proceso">Así trabajamos, <em>paso a paso</em></h2>
+        <p class="seccion__intro">Usted sabe en todo momento en qué vamos y cuándo le toca participar.</p>
+
+        <!-- 7 pasos (RF-07, CA-07.1). <ol> = lista ORDENADA: el lector de pantalla anuncia el número de cada paso (CA-07.3).
+             Los números que se ven en los círculos los pone el CSS con un contador. -->
+        <!-- role="list": Safari deja de anunciar como lista las que tienen list-style: none; esto lo evita -->
+        <ol class="proceso" role="list">
+          <li class="paso">
+            <h3>Conversamos</h3>
+            <p>Me cuenta qué necesita y qué busca para su negocio.</p>
+          </li>
+          <li class="paso">
+            <h3>Propuesta</h3>
+            <p>Le envío por escrito qué incluye, cuánto tarda y cuánto cuesta.</p>
+          </li>
+          <li class="paso">
+            <h3>Acuerdo</h3>
+            <p>Aprobamos juntos el alcance y arrancamos.</p>
+          </li>
+          <li class="paso">
+            <h3>Diseño</h3>
+            <p>Ve cómo se verá su página antes de construirla.</p>
+          </li>
+          <li class="paso">
+            <h3>Construcción</h3>
+            <p>La construyo y le muestro los avances.</p>
+          </li>
+          <li class="paso">
+            <h3>Pruebas</h3>
+            <p>La reviso en celular y computador antes de publicar.</p>
+          </li>
+          <li class="paso">
+            <h3>Publicación</h3>
+            <p>Su página en línea, a su nombre.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. PROYECTOS · HU-08 y HU-09 -->
+    <section id="proyectos" class="seccion" aria-labelledby="titulo-proyectos">
+      <div class="contenedor">
+        <h2 id="titulo-proyectos">Algunos de mis <em>proyectos</em></h2>
+        <p class="seccion__intro">Trabajos reales que muestran lo que puedo hacer por su negocio.</p>
+
+        <!-- Proyectos (RF-08). Cada tarjeta: imagen, título, problema y qué se hizo (CA-08.1).
+             Chicken & Grill: permiso del negocio confirmado (RC-04, descubrimiento.md).
+             Automatización QA: proyecto propio de Sebastián para automatizar su trabajo; se muestra sin enlace al código (28 oct 2026). -->
+        <ul class="proyectos" role="list">
+          <li class="proyecto">
+            <!-- Tres capturas como pantallas de celular.
+                 loading="lazy": la imagen se descarga solo cuando la persona se acerca (CA-08.4). -->
+            <div class="proyecto__imagen proyecto__imagen--celulares">
+              <img src="img/proyectos/asadero-1-menu.jpg" alt="Menú del sistema de pedidos de Chicken & Grill con categorías, fotos y precios" width="554" height="1200" loading="lazy">
+              <img src="img/proyectos/asadero-2-producto.jpg" alt="Detalle de un plato con el acompañamiento obligatorio por escoger" width="554" height="1200" loading="lazy">
+              <img src="img/proyectos/asadero-4-whatsapp.jpg" alt="Pedido confirmado con el mensaje automático que llega por WhatsApp" width="554" height="1200" loading="lazy">
+            </div>
+            <div class="proyecto__texto">
+              <p class="proyecto__etiqueta">Demo · Restaurante</p>
+              <h3>Sistema de pedidos para Chicken &amp; Grill</h3>
+              <p><strong>El reto:</strong> que los clientes del asadero pudieran armar su pedido desde el celular, sin hacer la llamada.</p>
+              <p><strong>Lo que hice:</strong> un menú con fotos y categorías, opciones obligatorias por plato, carrito con el total y confirmación automática del pedido por WhatsApp.</p>
+              <!-- HU-09: abre el detalle en una pestaña nueva (CA-09.1); rel="noopener" por seguridad (CA-09.2) -->
+              <a class="boton boton--borde" href="proyecto-chicken-grill.html" target="_blank" rel="noopener">
+                Ver las pantallas
+                <span class="solo-lector">del sistema de pedidos (se abre en una pestaña nueva)</span>
+              </a>
+            </div>
+          </li>
+          <li class="proyecto">
+            <div class="proyecto__imagen">
+              <img src="img/proyectos/automatizacion-qa.svg" alt="Ilustración del flujo: historia de usuario, casos de prueba generados con inteligencia artificial y certificación en PDF" width="640" height="400" loading="lazy">
+            </div>
+            <div class="proyecto__texto">
+              <p class="proyecto__etiqueta">Proyecto propio · Calidad de software</p>
+              <h3>Automatización de pruebas con inteligencia artificial</h3>
+              <p><strong>El reto:</strong> en mi trabajo como analista de calidad, buena parte del tiempo se iba en tareas manuales y repetitivas: redactar casos de prueba, reunir evidencias y armar informes.</p>
+              <p><strong>Lo que hice:</strong> creé mis propias herramientas que, con apoyo de un agente de inteligencia artificial, redactan los casos de prueba, reúnen las evidencias y generan la certificación en PDF con un solo comando.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. SOBRE MÍ · HU-10 -->
+    <section id="sobre-mi" class="seccion seccion--alterna" aria-labelledby="titulo-sobre-mi">
+      <div class="contenedor">
+        <!-- Emblema pequeño, como firma: en celular va encima del texto y en computador a la izquierda.
+             Se usa el mismo archivo de la portada, así el navegador no lo descarga dos veces (CA-10.1, CA-10.3). -->
+        <div class="sobre-mi">
+          <img class="sobre-mi__emblema" src="img/emblema.svg"
+               alt="Emblema de Gonztech: tigre con circuitos sobre un arco verde"
+               width="264" height="304" loading="lazy">
+
+          <div>
+            <h2 id="titulo-sobre-mi">Sobre mí</h2>
+            <!-- Textos aprobados por Sebastián. RC-01: sin cifras inventadas · RC-02: "estudiante", no "ingeniero" · RC-03: sin nombrar al empleador -->
+            <p class="sobre-mi__entrada">Soy Sebastián González. Mi oficio es encontrar los errores antes de que los encuentre su cliente.</p>
+            <p>Trabajo como analista de calidad de software (QA) en una empresa de desarrollo y soy estudiante de Ingeniería de Software. En mi día a día pruebo aplicaciones, diseño casos de prueba y automatizo pruebas con inteligencia artificial.</p>
+            <p>Creé Gonztech para llevar ese mismo cuidado a negocios como el suyo: páginas y herramientas que se revisan paso a paso antes de entregarse.</p>
+
+            <h3 class="titulo-pequeno">Por qué la calidad es mi diferencia</h3>
+            <!-- Reutiliza el estilo de los compromisos (círculo con check) -->
+            <ul class="sobre-mi__lista" role="list">
+              <li class="compromiso"><p><strong>Pruebo como lo haría su cliente:</strong> en celular y en computador, paso por paso.</p></li>
+              <li class="compromiso"><p><strong>Dejo por escrito lo que reviso,</strong> para que usted sepa qué se probó.</p></li>
+              <li class="compromiso"><p><strong>Le hablo claro:</strong> sin palabras técnicas y sin prometer lo que no puedo cumplir.</p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CONTACTO · HU-11 a HU-13 -->
+    <section id="contacto" class="seccion" aria-labelledby="titulo-contacto">
+      <div class="contenedor">
+        <h2 id="titulo-contacto">Hablemos de <em>su negocio</em></h2>
+        <!-- CC-04: frase que baja la barrera para escribir -->
+        <p class="seccion__intro">Una conversación corta basta para saber por dónde empezar. Sin compromiso.</p>
+
+        <!-- HU-11. El número y el correo van también como texto normal, para poder copiarlos (CA-11.3) -->
+        <ul class="contacto__medios" role="list">
+          <li class="tarjeta contacto__medio">
+            <h3>WhatsApp</h3>
+            <p class="contacto__dato">+57 317 568 0756</p>
+            <!-- Mismo ENLACE OFICIAL de WhatsApp que el resto de la página (CA-02.4, CA-11.2) -->
+            <a class="boton boton--principal"
+               href="https://wa.me/573175680756?text=Hola%20Sebasti%C3%A1n%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20hablar%20sobre%20mi%20negocio."
+               target="_blank" rel="noopener">
+              <svg class="boton__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+              Escríbame por WhatsApp
+              <span class="solo-lector">(se abre en una pestaña nueva)</span>
+            </a>
+          </li>
+          <li class="tarjeta contacto__medio">
+            <h3>Correo</h3>
+            <!-- Correo de la marca (CC-12). Si cambia (por ejemplo a contacto@gonztech.co en la Fase 7),
+                 se reemplaza aquí en los DOS lugares: el texto y el href. -->
+            <p class="contacto__dato">contacto.gonztech@gmail.com</p>
+            <!-- mailto: abre la aplicación de correo con el destinatario y el asunto ya escritos (CA-11.1).
+                 En el asunto, %20 es un espacio y %C3%A1 es la "á" -->
+            <a class="boton boton--borde"
+               href="mailto:contacto.gonztech@gmail.com?subject=Consulta%20desde%20la%20p%C3%A1gina%20Gonztech">
+              <svg class="boton__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Escríbame un correo
+            </a>
+          </li>
+        </ul>
+
+        <!-- ===== FORMULARIO · HU-12 y HU-13 (contrato en docs/arquitectura.md §5) =====
+             - data-netlify="true": Netlify Forms recibe los datos y avisa por correo (ADR-003).
+             - netlify-honeypot: nombre del campo trampa contra robots (CA-12.7).
+             - action="gracias.html": página de confirmación si el JavaScript no funciona.
+             - Sin JavaScript, el navegador valida con required y maxlength (capa 1).
+               Con JavaScript, main.js pone novalidate y muestra mensajes propios en español (capa 2). -->
+        <div class="formulario-caja">
+          <h3 id="titulo-formulario">¿Prefiere dejarme un mensaje?</h3>
+          <p class="formulario__intro">Le respondo por el medio que usted me indique.</p>
+
+          <form class="formulario" id="formulario" name="contacto" method="POST" action="gracias.html"
+                data-netlify="true" netlify-honeypot="bot-field" aria-labelledby="titulo-formulario">
+            <!-- Netlify necesita saber el nombre del formulario también cuando se envía con JavaScript -->
+            <input type="hidden" name="form-name" value="contacto">
+
+            <!-- Campo trampa: las personas no lo ven ni lo oyen; los robots lo llenan y el mensaje se descarta -->
+            <p class="trampa" aria-hidden="true">
+              <label>No llene este campo <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+            </p>
+
+            <div class="campo">
+              <label for="nombre">Nombre <span class="campo__nota">(obligatorio)</span></label>
+              <input id="nombre" name="nombre" type="text" required minlength="2" maxlength="80"
+                     autocomplete="name" aria-describedby="error-nombre">
+              <p class="campo__error" id="error-nombre" hidden></p>
+            </div>
+
+            <div class="campo">
+              <label for="negocio">Negocio <span class="campo__nota">(opcional)</span></label>
+              <input id="negocio" name="negocio" type="text" maxlength="100" autocomplete="organization">
+            </div>
+
+            <div class="campo">
+              <!-- El id es medio-contacto y no contacto: ese id ya es de la sección y la etiqueta quedaría sin asociar (DEF-03) -->
+              <label for="medio-contacto">Correo o celular <span class="campo__nota">(obligatorio)</span></label>
+              <!-- inputmode="email" muestra el teclado con @ en el celular, sin impedir escribir un número -->
+              <input id="medio-contacto" name="contacto" type="text" required maxlength="100" inputmode="email"
+                     autocomplete="email" aria-describedby="ayuda-contacto error-contacto">
+              <p class="campo__ayuda" id="ayuda-contacto">Por ejemplo: nombre@correo.com o 300 123 4567</p>
+              <p class="campo__error" id="error-contacto" hidden></p>
+            </div>
+
+            <!-- CC-07: opcional. Ayuda a Sebastián a saber de qué le van a hablar antes de responder -->
+            <div class="campo">
+              <label for="interes">¿Qué le interesa? <span class="campo__nota">(opcional)</span></label>
+              <select id="interes" name="interes">
+                <option value="">Escoja una opción</option>
+                <option>Páginas web institucionales</option>
+                <option>Catálogo con cotización por WhatsApp</option>
+                <option>Automatizaciones e inteligencia artificial</option>
+                <option>Revisión y pruebas de su página o aplicación</option>
+                <option>Presencia en Google y Google Maps</option>
+                <option>Alojamiento y mantenimiento</option>
+                <option>Placas y tarjetas NFC para reseñas</option>
+                <option>Algo más grande</option>
+                <option>No estoy seguro todavía</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label for="mensaje">Mensaje <span class="campo__nota">(obligatorio)</span></label>
+              <!-- maxlength="1000": el navegador no deja escribir más (CA-12.4) -->
+              <textarea id="mensaje" name="mensaje" rows="5" required minlength="10" maxlength="1000"
+                        aria-describedby="contador-mensaje error-mensaje"></textarea>
+              <p class="campo__ayuda" id="contador-mensaje">Máximo 1.000 caracteres.</p>
+              <p class="campo__error" id="error-mensaje" hidden></p>
+            </div>
+
+            <!-- HU-13: la casilla viene SIN marcar (CA-13.2). El aviso abre en otra pestaña para no perder lo escrito (CA-13.3) -->
+            <div class="campo campo--casilla">
+              <input id="autorizacion" name="autorizacion" type="checkbox" value="sí" required
+                     aria-describedby="error-autorizacion">
+              <label for="autorizacion">Autorizo el tratamiento de mis datos según el
+                <a href="privacidad.html" target="_blank" rel="noopener">aviso de privacidad<span class="solo-lector"> (se abre en una pestaña nueva)</span></a>.
+              </label>
+              <p class="campo__error" id="error-autorizacion" hidden></p>
+            </div>
+
+            <button class="boton boton--principal formulario__enviar" type="submit">Enviar mensaje</button>
+
+            <!-- Aquí aparece el resultado del envío. role="status" hace que el lector de pantalla lo lea (CA-12.8) -->
+            <div class="formulario__estado" id="estado-formulario" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PIE DE PÁGINA · HU-15 ===== -->
+  <footer class="pie">
+    <div class="contenedor pie__fila">
+      <!-- Logo completo, como en la imagen de Sebastián: tigre, nombre y eslogan (CC-10) -->
+      <div class="pie__marca">
+        <div class="pie__logo">
+          <img src="img/logo-tigre.svg" alt="" width="60" height="48">
+          <span class="pie__logo-texto">
+            <img src="img/nombre.svg" alt="Gonztech" width="158" height="18">
+            <img src="img/eslogan.svg" alt="Tecnología que impulsa" width="158" height="10">
+          </span>
+        </div>
+        <p>Gonztech · Sebastián González – Desarrollo web y calidad de software</p>
+      </div>
+      <p class="pie__legal">
+        <!-- "2026" es el respaldo si no hay JavaScript; main.js lo cambia por el año actual (CA-15.2) -->
+        © <span id="anio">2026</span> ·
+        <a href="privacidad.html">Aviso de privacidad</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP (HU-03). Usa el ENLACE OFICIAL de la HU-02 (CA-02.4).
+       aria-label: como el botón solo tiene un ícono, esto es lo que dice el lector de pantalla (CA-03.3).
+       main.js lo esconde cuando la persona llega a Contacto o al pie, donde ya están los datos (CA-03.2). -->
+  <a class="whatsapp-flotante"
+     href="https://wa.me/573175680756?text=Hola%20Sebasti%C3%A1n%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20hablar%20sobre%20mi%20negocio."
+     target="_blank" rel="noopener"
+     aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+  </a>
+</body>
+</html>

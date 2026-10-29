@@ -1,0 +1,24 @@
+# Configuración de publicación en Netlify (Fase 7, ADR-002).
+# Netlify lee este archivo en cada publicación. Solo se publica la carpeta "publicar":
+# así los documentos internos (docs/, CLAUDE.md, .claude/) nunca quedan en internet.
+
+[build]
+  # Copia a "publicar" solo lo que ve el visitante: las 4 páginas, los estilos, el JavaScript y las imágenes.
+  command = "rm -rf publicar && mkdir publicar && cp -R index.html privacidad.html proyecto-chicken-grill.html gracias.html css js img publicar/"
+  publish = "publicar"
+
+# Protecciones básicas de seguridad para todas las páginas (Fase 5, plan-de-pruebas.md §6).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # El navegador no "adivina" el tipo de archivo
+    X-Content-Type-Options = "nosniff"
+    # Al salir hacia otro sitio (WhatsApp, Google) solo se envía el dominio, no la página exacta
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Ninguna otra página puede meter esta dentro de un marco (evita engaños tipo "clickjacking")
+    X-Frame-Options = "DENY"
+    # La página no pide cámara, micrófono ni ubicación
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # Solo se carga lo que viene de esta misma página. El código "sha256-…" autoriza el único
+    # script en línea (el que agrega la clase "js" en index.html); si ese script cambia, hay que recalcularlo.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
